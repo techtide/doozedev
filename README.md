@@ -1,2 +1,2 @@
-# doozeapp
-Made in AcornHack AI (2017).
+# dooze
+A demo for AcornHack AI (2017).
