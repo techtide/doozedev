@@ -14,7 +14,7 @@ import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.Ke
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import javax.swing.JTextArea;
+
 /**
  *
  * @author greenie
@@ -30,15 +30,22 @@ public class EmotionAnalysis {
        
          service = new NaturalLanguageUnderstanding(
                 NaturalLanguageUnderstanding.VERSION_DATE_2017_02_27,
-                "116ecd04-fea9-4f54-bcd5-49b39ecf5f1a",
-                "Wat0UHqCdb8R"
+                "Username",
+                "Password"
         );
          
         this.textToAnalyze = textToAnalyze;
         
+         KeywordsOptions keywords = new KeywordsOptions.Builder()
+                .sentiment(Boolean.TRUE)
+                .emotion(Boolean.TRUE)
+                .limit(7)   
+                .build();
+        
         List<String> targets = new ArrayList<String>();
         
-        targets = getTargetListAllWords(textToAnalyze);
+        targets = getTargetListAllWords(textToAnalyze); 
+        
         
         /*SentimentOptions sentiment = new SentimentOptions.Builder()
                 .build(); */
@@ -47,11 +54,7 @@ public class EmotionAnalysis {
             .targets(targets)
             .build();
 
-        KeywordsOptions keywords = new KeywordsOptions.Builder()
-                .sentiment(Boolean.TRUE)
-                .emotion(Boolean.TRUE)
-                .limit(7)   
-                .build();
+       
         
         Features features = new Features.Builder()
                 .emotion(emotion)
@@ -80,6 +83,11 @@ public class EmotionAnalysis {
     
     public static List<String> getTargetListAllWords(String sentence) {
         return Arrays.asList(sentence.split(" "));
+    }
+    
+    public static List<String> getKeywordsIntoArray(KeywordsOptions keywords) {
+       // keywords.
+       return null;
     }
 
 }
