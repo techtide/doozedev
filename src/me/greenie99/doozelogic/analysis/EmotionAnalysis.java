@@ -24,19 +24,23 @@ import java.util.Scanner;
 public class EmotionAnalysis {
     
     public static AnalysisResults response;
+    // public static String textToAnalyze;
     
-    public static void main(String[] args) {
+    
+    public static void main(String[] args, String textToAnalyze) {
         NaturalLanguageUnderstanding service = new NaturalLanguageUnderstanding(
                 NaturalLanguageUnderstanding.VERSION_DATE_2017_02_27,
                 "116ecd04-fea9-4f54-bcd5-49b39ecf5f1a",
                 "Wat0UHqCdb8R"
         );
-
+        /* THINGS ONLY FOR CONSOLE
         System.out.println("Enter the emotions that you feel right now: \n");
         Scanner scanner = new Scanner(System.in);
 
-        String textToAnalyze = scanner.nextLine();
+        // textToAnalyze = scanner.nextLine(); THIS IS ONLY FOR THE CONSOLE
+        */
         
+       
         List<String> targets = new ArrayList<>();
         
         targets = getTargetListAllWords(textToAnalyze);
@@ -81,4 +85,8 @@ public class EmotionAnalysis {
         
         return null;
     }
+    
+    /*public static void overrideTextEntryString(String text) {
+        textToAnalyze = text;
+    }*/
 }
