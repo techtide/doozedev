@@ -10,6 +10,7 @@ import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.An
 import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.AnalyzeOptions;
 import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.EmotionOptions;
 import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.Features;
+import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.KeywordsOptions;
 // import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.SentimentOptions;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,11 +28,9 @@ public class EmotionAnalysis {
     public static void main(String[] args) {
         NaturalLanguageUnderstanding service = new NaturalLanguageUnderstanding(
                 NaturalLanguageUnderstanding.VERSION_DATE_2017_02_27,
-                "USERNAME",
-                "PASSWORD"
+                "116ecd04-fea9-4f54-bcd5-49b39ecf5f1a",
+                "Wat0UHqCdb8R"
         );
-
-//        String url = "www.wsj.com/news/markets";
 
         System.out.println("Enter the emotions that you feel right now: \n");
         Scanner scanner = new Scanner(System.in);
@@ -40,7 +39,7 @@ public class EmotionAnalysis {
         
         List<String> targets = new ArrayList<>();
         
-        targets = getTargetList(textToAnalyze);
+        targets = getTargetListAllWords(textToAnalyze);
         
         /*SentimentOptions sentiment = new SentimentOptions.Builder()
                 .build(); */
@@ -49,8 +48,15 @@ public class EmotionAnalysis {
             .targets(targets)
             .build();
 
+        KeywordsOptions keywords = new KeywordsOptions.Builder()
+                .sentiment(Boolean.TRUE)
+                .emotion(Boolean.TRUE)
+                .limit(7)   
+                .build();
+        
         Features features = new Features.Builder()
                 .emotion(emotion)
+                .keywords(keywords)
                 .build();
 
         AnalyzeOptions parameters = new AnalyzeOptions.Builder()
@@ -65,7 +71,14 @@ public class EmotionAnalysis {
         System.out.println(response);
     }
     
-    public static List<String> getTargetList(String sentence) {
+    public static List<String> getTargetListAllWords(String sentence) {
         return Arrays.asList(sentence.split(" "));
+    }
+    
+    public static List<String> promptWatsonForKeywords(String sentence) {
+        
+        // discard
+        
+        return null;
     }
 }
