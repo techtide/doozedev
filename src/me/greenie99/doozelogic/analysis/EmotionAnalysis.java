@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -24,23 +25,19 @@ import java.util.Scanner;
 public class EmotionAnalysis {
     
     public static AnalysisResults response;
-    // public static String textToAnalyze;
+    public static String textToAnalyze;
+    private NaturalLanguageUnderstanding service;
     
-    
-    public static void main(String[] args, String textToAnalyze) {
-        NaturalLanguageUnderstanding service = new NaturalLanguageUnderstanding(
+    public EmotionAnalysis (String textToAnalyze) {
+        
+         service = new NaturalLanguageUnderstanding(
                 NaturalLanguageUnderstanding.VERSION_DATE_2017_02_27,
                 "116ecd04-fea9-4f54-bcd5-49b39ecf5f1a",
                 "Wat0UHqCdb8R"
         );
-        /* THINGS ONLY FOR CONSOLE
-        System.out.println("Enter the emotions that you feel right now: \n");
-        Scanner scanner = new Scanner(System.in);
-
-        // textToAnalyze = scanner.nextLine(); THIS IS ONLY FOR THE CONSOLE
-        */
+         
+        this.textToAnalyze = textToAnalyze;
         
-       
         List<String> targets = new ArrayList<>();
         
         targets = getTargetListAllWords(textToAnalyze);
@@ -75,6 +72,17 @@ public class EmotionAnalysis {
         System.out.println(response);
     }
     
+    public static void main(String[] args) {
+       
+        /* THINGS ONLY FOR CONSOLE
+        System.out.println("Enter the emotions that you feel right now: \n");
+        Scanner scanner = new Scanner(System.in);
+
+        // textToAnalyze = scanner.nextLine(); THIS IS ONLY FOR THE CONSOLE
+        */
+    }
+    
+    
     public static List<String> getTargetListAllWords(String sentence) {
         return Arrays.asList(sentence.split(" "));
     }
@@ -89,4 +97,8 @@ public class EmotionAnalysis {
     /*public static void overrideTextEntryString(String text) {
         textToAnalyze = text;
     }*/
+
+    public EmotionAnalysis(JTextArea recordTextArea) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

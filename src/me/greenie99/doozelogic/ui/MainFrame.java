@@ -141,8 +141,8 @@ public class MainFrame extends javax.swing.JFrame {
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         // TODO add your handling code here:
         String textRecordedInForm = recordTextArea.getText();
-        EmotionAnalysis emotionAnalysisObject = new EmotionAnalysis();
-        emotionAnalysisObject.overrideTextEntryString(textRecordedInForm);
+        EmotionAnalysis emotionAnalysisObject = new EmotionAnalysis(textRecordedInForm);
+        
     }//GEN-LAST:event_submitButtonActionPerformed
 
     /**
