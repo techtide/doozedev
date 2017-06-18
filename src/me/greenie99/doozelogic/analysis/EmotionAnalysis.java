@@ -11,13 +11,10 @@ import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.An
 import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.EmotionOptions;
 import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.Features;
 import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.KeywordsOptions;
-// import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.SentimentOptions;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 import javax.swing.JTextArea;
-
 /**
  *
  * @author greenie
@@ -27,9 +24,10 @@ public class EmotionAnalysis {
     public static AnalysisResults response;
     public static String textToAnalyze;
     private NaturalLanguageUnderstanding service;
+    public static ArrayList<AnalysisResults> resultsStored;
     
     public EmotionAnalysis (String textToAnalyze) {
-        
+       
          service = new NaturalLanguageUnderstanding(
                 NaturalLanguageUnderstanding.VERSION_DATE_2017_02_27,
                 "116ecd04-fea9-4f54-bcd5-49b39ecf5f1a",
@@ -38,7 +36,7 @@ public class EmotionAnalysis {
          
         this.textToAnalyze = textToAnalyze;
         
-        List<String> targets = new ArrayList<>();
+        List<String> targets = new ArrayList<String>();
         
         targets = getTargetListAllWords(textToAnalyze);
         
@@ -69,36 +67,19 @@ public class EmotionAnalysis {
                 .analyze(parameters)
                 .execute();
     
+        
+        
         System.out.println(response);
+        
+        resultsStored.add(response);
     }
     
     public static void main(String[] args) {
-       
-        /* THINGS ONLY FOR CONSOLE
-        System.out.println("Enter the emotions that you feel right now: \n");
-        Scanner scanner = new Scanner(System.in);
-
-        // textToAnalyze = scanner.nextLine(); THIS IS ONLY FOR THE CONSOLE
-        */
+         resultsStored = new ArrayList<>();
     }
-    
     
     public static List<String> getTargetListAllWords(String sentence) {
         return Arrays.asList(sentence.split(" "));
     }
-    
-    public static List<String> promptWatsonForKeywords(String sentence) {
-        
-        // discard
-        
-        return null;
-    }
-    
-    /*public static void overrideTextEntryString(String text) {
-        textToAnalyze = text;
-    }*/
 
-    public EmotionAnalysis(JTextArea recordTextArea) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
