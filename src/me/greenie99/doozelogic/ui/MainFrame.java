@@ -42,9 +42,11 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        helpNeededLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,7 +54,9 @@ public class MainFrame extends javax.swing.JFrame {
         helpLabel.setText("Please record the emotions that you feel currently.");
 
         recordTextArea.setColumns(20);
+        recordTextArea.setLineWrap(true);
         recordTextArea.setRows(5);
+        recordTextArea.setText("I am so depressed. I feel sad and have mood swings all the time. I hate talking to James, my boss - he is so irritating and doesn’t recognise the good work I do. I work so hard. I can never get any sleep, anyways, and that is really irritating. I just feel so lonely and I feel like I’m about to cry all the time.");
         jScrollPane1.setViewportView(recordTextArea);
 
         submitButton.setText("Submit for Analysis");
@@ -143,39 +147,57 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Collect", helpJPanel);
 
-        jLabel8.setText("Your emotions today:");
+        jLabel10.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel10.setText("Today's Emotions");
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/me/greenie99/doozelogic/resources/chart.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jLabel8)
+                .addContainerGap(35, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel10)
+                .addGap(258, 258, 258))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel8)
+                .addContainerGap(197, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Cure", jPanel2);
+
+        helpNeededLabel.setFont(new java.awt.Font("Lucida Grande", 0, 36)); // NOI18N
+        helpNeededLabel.setText("Data being processed...");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(233, Short.MAX_VALUE)
-                .addComponent(jLabel8)
-                .addGap(219, 219, 219))
+                .addContainerGap(134, Short.MAX_VALUE)
+                .addComponent(helpNeededLabel)
+                .addGap(121, 121, 121))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel8)
-                .addContainerGap(581, Short.MAX_VALUE))
+                .addComponent(helpNeededLabel)
+                .addContainerGap(554, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Analyse", jPanel1);
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 587, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 603, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Cure", jPanel2);
 
         javax.swing.GroupLayout uiJPanelLayout = new javax.swing.GroupLayout(uiJPanel);
         uiJPanel.setLayout(uiJPanelLayout);
@@ -198,11 +220,13 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(uiJPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(uiJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(uiJPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(uiJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -212,7 +236,7 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         String textRecordedInForm = recordTextArea.getText();
         EmotionAnalysis emotionAnalysisObject = new EmotionAnalysis(textRecordedInForm);
-        
+        helpNeededLabel.text = "";
     }//GEN-LAST:event_submitButtonActionPerformed
 
     /**
@@ -248,12 +272,21 @@ public class MainFrame extends javax.swing.JFrame {
                 new MainFrame().setVisible(true);
             }
         });
+        
+        
+        
+    }
+    
+    public static void formTodayGraph() {
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel helpJPanel;
     private javax.swing.JLabel helpLabel;
+    private javax.swing.JLabel helpNeededLabel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
